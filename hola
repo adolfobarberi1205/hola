@@ -1,0 +1,325 @@
+
+
+
+public class ListaDoble<T> {
+
+    private NodoDoble pFirst;
+    private NodoDoble pLast;
+    private int size;
+    private int maxsize;
+    
+
+    public ListaDoble() {
+        this.pFirst = null;
+        this.pLast = null;
+        this.size = 0;
+        this.maxsize = 16;
+        
+
+    }
+
+    public boolean EsVacia() {
+        return this.pFirst == null;
+    }
+
+    public void AgregarFinal(T data) {
+        NodoDoble<T> nodo = new NodoDoble(data);
+        if (EsVacia()) {
+            pLast = nodo;
+            pFirst = nodo;
+        } else {
+            pLast.setpNext(nodo);
+            pLast = nodo;
+        }
+        size++;
+    }
+    
+    public void Imprimir(){
+        NodoDoble pAux = pFirst;
+        while(pAux != null){
+            System.out.println(pAux.getData() + String.valueOf(pAux.getPosition()));
+            pAux = pAux.getpNext();
+        }
+    }
+    
+    
+    public NodoDoble BuscarIndice(int index){
+        NodoDoble pAux= pFirst;
+        int count = 0;
+        while(pAux != null && count != index){
+            pAux = pAux.getpNext();
+            count++;
+        }
+        
+        if(pAux != null){
+            return pAux;
+        } else{
+            return null;
+        }
+    }
+    
+    public T BuscarDataIndice(int index){
+        NodoDoble<T> pAux =this.BuscarIndice(index);
+        if (pAux != null){
+            return pAux.getData();
+        }else{
+        return null;
+        }
+    }
+
+    public NodoDoble<T> getpFirst() {
+        return pFirst;
+    }
+
+    public void setpFirst(NodoDoble<T> pFirst) {
+        this.pFirst = pFirst;
+    }
+
+    public NodoDoble<T> getpLast() {
+        return pLast;
+    }
+
+    public void setpLast(NodoDoble<T> pLast) {
+        this.pLast = pLast;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getMaxsize() {
+        return maxsize;
+        
+    }public void recorrer(ListaDoble lista,T data){
+        lista.setposicionnodo(lista);
+        NodoDoble pAux= pFirst;
+        while(pAux != null){
+          if(pAux.getData().equals(data))
+                System.out.println(pAux.getPosition());
+                       
+                    
+                    
+        pAux = pAux.getpNext();
+    
+            }
+         
+    }
+
+   
+
+    public void setposicionnodo(ListaDoble T) {
+        NodoDoble pAux = pFirst;
+    int contador = 0;
+        
+    while(pAux != null){
+        pAux.setPosition(contador);
+//        System.out.println(pAux.getPosition()); // Imprime la posición antes de mover el puntero
+        pAux = pAux.getpNext();
+        contador ++;
+    }
+}  
+    public void setADY(ListaDoble T) {
+        T.setposicionnodo(T);
+// nodo 0      
+    T.BuscarIndice(0).AgregaAdy(String.valueOf(T.BuscarIndice(1).getData())); 
+     T.BuscarIndice(0).getListaAdy().BuscarIndice(0).setPosition(1);
+     
+    T.BuscarIndice(0).AgregaAdy(String.valueOf(T.BuscarIndice(4).getData()));
+    T.BuscarIndice(0).getListaAdy().BuscarIndice(1).setPosition(4);
+    
+    T.BuscarIndice(0).AgregaAdy(String.valueOf(T.BuscarIndice(5).getData()));
+    T.BuscarIndice(0).getListaAdy().BuscarIndice(2).setPosition(5);
+    
+    
+//    nodo 1 
+    
+    T.BuscarIndice(1).AgregaAdy(String.valueOf(T.BuscarIndice(0).getData()));
+    T.BuscarIndice(1).getListaAdy().BuscarIndice(0).setPosition(0);
+    
+    T.BuscarIndice(1).AgregaAdy(String.valueOf(T.BuscarIndice(2).getData()));
+    T.BuscarIndice(1).getListaAdy().BuscarIndice(1).setPosition(2);
+    
+    T.BuscarIndice(1).AgregaAdy(String.valueOf(T.BuscarIndice(4).getData()));
+    T.BuscarIndice(1).getListaAdy().BuscarIndice(2).setPosition(4);
+    
+    T.BuscarIndice(1).AgregaAdy(String.valueOf(T.BuscarIndice(5).getData()));
+    T.BuscarIndice(1).getListaAdy().BuscarIndice(3).setPosition(5);
+    
+    T.BuscarIndice(1).AgregaAdy(String.valueOf(T.BuscarIndice(6).getData()));
+    T.BuscarIndice(1).getListaAdy().BuscarIndice(4).setPosition(6);
+    
+    }
+  
+    public void BFS4(ListaDoble lista,  T data) {
+        lista.setADY(lista);
+        NodoDoble pAux = pFirst;
+        while(pAux != null) {
+            if (pAux.getData().equals(data)) {
+                pAux.getListaAdy().Imprimir();
+                    int num = pAux.getListaAdy().recorrersin("m");
+                        System.out.println(num);
+                        break;
+            }
+            pAux = pAux.getpNext();
+        }
+}
+
+    }public int recorrersin(T data){
+        NodoDoble pAux = pFirst;
+        while(pAux != null){
+          if(pAux.getData().equals(data))
+                pAux.getPosition();
+        }
+    
+
+public class NodoDoble<T> {
+    private NodoDoble<T> pNext;
+    private NodoDoble<T> pPrev;
+    private T data;
+    private boolean visitado;
+    private ListaDoble ListaAdy;
+    private int position;
+    
+
+    public  NodoDoble(T data){
+        this.pNext = null;
+        this.pPrev = null;
+        this.data = data;
+        this.visitado = false;
+        this.ListaAdy = new ListaDoble();
+        
+        
+    }
+    
+    public void printAdjacencyList() {
+        System.out.println(data);
+        if (ListaAdy.EsVacia()) {
+            System.out.println("No hay adyacentes");
+        } else {
+            for (int i = 0; i < ListaAdy.getSize(); i++) {
+            String neighbor = ListaAdy.BuscarIndice(i).getData().toString();
+            System.out.print(neighbor + ", ");
+}
+        System.out.println();
+        }
+    }
+    
+    public void AgregaAdy(T data) {
+        this.ListaAdy.AgregarFinal(data);
+    }
+    
+
+    public NodoDoble<T> getpNext() {
+        return pNext;
+    }
+
+    public void setpNext(NodoDoble<T> pNext) {
+        this.pNext = pNext;
+    }
+
+    public NodoDoble<T> getpPrev() {
+        return pPrev;
+    }
+
+    public void setpLast(NodoDoble<T> pPrev) {
+        this.pPrev = pPrev;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public boolean isVisitado() {
+        return visitado;
+    }
+
+    public void setVisitado(boolean visitado) {
+        this.visitado = false;
+    }
+
+    public ListaDoble getListaAdy() {
+        return ListaAdy;
+    }
+
+    public void setListaAdy(T data) {
+        this.ListaAdy = ListaAdy;
+        this.data = data;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+    
+    istaDoble sopa = new ListaDoble();
+        
+        sopa.AgregarFinal("a");  // 0
+        sopa.AgregarFinal("m"); // 1
+        sopa.AgregarFinal("o"); //2
+        sopa.AgregarFinal("r"); //3
+        sopa.AgregarFinal("e"); //4
+        sopa.AgregarFinal("f"); //5
+        sopa.AgregarFinal("g"); // 6
+        sopa.AgregarFinal("h"); //7
+        sopa.AgregarFinal("i"); //8
+        sopa.AgregarFinal("j"); //9
+        sopa.AgregarFinal("k"); //10
+        sopa.AgregarFinal("l");
+        sopa.AgregarFinal("m");
+        sopa.AgregarFinal("n");
+        sopa.AgregarFinal("o");
+        sopa.AgregarFinal("p");
+        
+        sopa.BFS4(sopa, "a");
+        
+    
+
+
+          
+        
+    
+    
+
+    
+    
+        
+     
+
+
+
+
+
+
+              
+
+
+    
+
+
+
+
+
+
+
+
+      
+    
+
+
+        
+    
+
+        
+    
+  
